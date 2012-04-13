@@ -1,0 +1,15 @@
+<table border="0" cellspacing="5" cellpadding="5">
+  <tbody>
+    <% @otas.each do |ota| %>
+        <tr>
+            <td><img src="<%= ota.icon_url %>" width=57 /></td>
+            <td><%= ota.name %></td>
+            <td><%= ota.filename %></td>
+            <td><a href="<%= ota.install_url %>"><%= ota.install_url %></a></td>
+            <td><a href="<%= ota.manifest_url %>"><%= ota.manifest_url %></a></td>
+            
+        </tr>
+    <% end %>
+
+</tbody>
+</table>
