@@ -13,7 +13,7 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/appsendr
 if development
     BASE_URL = "http://127.0.0.1:9393"
 else 
-    BASE_URL = "http://ota.io/"
+    BASE_URL = "http://ota.io"
 end
 S3_KEY     = 'AKIAI25H5FVEUIGMP6YQ'
 S3_SECRET = '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'
