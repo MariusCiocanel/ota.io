@@ -17,7 +17,7 @@ else
 end
 S3_KEY     = 'AKIAI25H5FVEUIGMP6YQ'
 S3_SECRET = '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'
-BUCKET = 'ota-io'
+BUCKET = 'ota.io'
 S3_URL = "http://s3.amazonaws.com/#{BUCKET}"
 
 LENGTH_OF_HASH = 5
