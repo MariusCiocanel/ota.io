@@ -1,12 +1,12 @@
 <table border="0" cellspacing="5" cellpadding="5">
   <tbody>
-    <% @otas.each do |ota| %>
+    <% @apps.each do |app| %>
         <tr>
-            <td><img src="<%= ota.icon_url %>" width=57 /></td>
-            <td><%= ota.name %></td>
-            <td><%= ota.filename %></td>
-            <td><a href="<%= ota.install_url %>"><%= ota.install_url %></a></td>
-            <td><a href="<%= ota.manifest_url %>"><%= ota.manifest_url %></a></td>
+            <td><img src="<%= app.icon_url %>" width=57 /></td>
+            <td><%= app.name %></td>
+            <td><%= app.filename %></td>
+            <td><a href="<%= app.install_url %>"><%= app.install_url %></a></td>
+            <td><a href="<%= app.manifest_url %>"><%= app.manifest_url %></a></td>
             
         </tr>
     <% end %>

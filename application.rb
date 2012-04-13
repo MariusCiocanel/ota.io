@@ -12,14 +12,16 @@ development = ENV['DATABASE_URL'] ? false : true
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/appsendr-v2')
 if development
     BASE_URL = "http://127.0.0.1:9393"
+    BUCKET = 'ota.io.dev'
+    ASSET_URL = "http://#{BUCKET}.s3.amazonaws.com"
 else 
     BASE_URL = "http://ota.io"
+    ASSET_URL = "http://assets.ota.io"
+    
 end
-ASSET_URL = "http://assets.ota.io"
 
 S3_KEY     = 'AKIAI25H5FVEUIGMP6YQ'
 S3_SECRET = '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'
-BUCKET = 'ota.io'
 S3_URL = "http://s3.amazonaws.com/#{BUCKET}"
 
 LENGTH_OF_HASH = 5
