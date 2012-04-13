@@ -45,7 +45,7 @@ class App
     end
     
     def manifest_url
-        return BASE_URL+self.id+"/manifest"
+        return BASE_URL+"/"+self.id+"/manifest"
     end
     
     def icon_url
