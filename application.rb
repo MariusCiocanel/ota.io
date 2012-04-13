@@ -15,6 +15,8 @@ if development
     BUCKET = 'ota.io.dev'
     ASSET_URL = "http://#{BUCKET}.s3.amazonaws.com"
 else 
+    BUCKET = 'ota.io'
+    
     BASE_URL = "http://ota.io"
     ASSET_URL = "http://assets.ota.io"
     
