@@ -15,6 +15,8 @@ if development
 else 
     BASE_URL = "http://ota.io"
 end
+ASSET_URL = "http://assets.ota.io"
+
 S3_KEY     = 'AKIAI25H5FVEUIGMP6YQ'
 S3_SECRET = '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'
 BUCKET = 'ota.io'
@@ -49,12 +51,12 @@ class App
     end
     
     def icon_url
-        return S3_URL+"/app/#{self.id}/icon.png" if self.icon
-        return S3_URL+"/default.png"
+        return ASSET_URL+"/app/#{self.id}/icon.png" if self.icon
+        return ASSET_URL+"/default.png"
     end
     
     def app_url
-        return S3_URL+"/app/#{self.id}/#{self.filename}"
+        return ASSET_URL+"/app/#{self.id}/#{self.filename}"
     end
     
     def name
