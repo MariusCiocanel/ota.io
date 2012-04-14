@@ -14,11 +14,10 @@ if development
     BASE_URL = "http://127.0.0.1:9393"
     BUCKET = 'ota.io.dev'
     ASSET_URL = "http://#{BUCKET}.s3.amazonaws.com"
-else 
-    BUCKET = 'ota.io'
-    
+else     
     BASE_URL = "http://ota.io"
     ASSET_URL = "http://assets.ota.io"
+    BUCKET = 'assets.ota.io'
     
 end
 
