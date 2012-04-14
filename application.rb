@@ -71,7 +71,8 @@ DataMapper.auto_upgrade!
 
 
 get '/' do
-    erb :index
+    redirect "http://appsendr.com"
+    #erb :index
 end
 
 get '/all' do
