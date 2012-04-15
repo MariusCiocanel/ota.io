@@ -6,6 +6,8 @@ require 'data_mapper'
 require 'aws/s3'
 require 'plist'
 require 'set'
+require 'active_support'
+require 'base64'
 
 development = ENV['DATABASE_URL'] ? false : true
 
@@ -27,6 +29,28 @@ S3_URL = "http://s3.amazonaws.com/#{BUCKET}"
 
 LENGTH_OF_HASH = 5
 
+class MixPanel
+
+  # A simple function for asynchronously logging to the mixpanel.com API.
+  # This function requires `curl`.
+  #
+  # event: The overall event/category you would like to log this data under
+  # properties: A hash of key-value pairs that describe the event. Must include 
+  # the Mixpanel API token as 'token'
+  #
+  # See http://mixpanel.com/api/ for further detail.
+  def self.track(event, properties={})
+      if !properties.has_key?("token")
+        raise "Token is required"
+      end
+
+    params = {"event" => event, "properties" => properties}
+    data = ActiveSupport::Base64.encode64s(JSON.generate(params))
+    request = "http://api.mixpanel.com/track/?data=#{data}"
+
+    `curl -s '#{request}' &`
+  end
+end
 
 class App
     include DataMapper::Resource
@@ -77,6 +101,8 @@ end
 
 get '/all' do
     @apps = App.all
+    Mixpanel.track("All Listed",{:token=>"1f737f06eff5580283a9a9e855d98f9d"})
+    
   erb :all
 end
 
@@ -134,6 +160,7 @@ post '/app' do
     
     if app
         _upload(file_data,key,name)  
+        Mixpanel.track("API Upload",{:token=>"1f737f06eff5580283a9a9e855d98f9d"})
         _success({:id=>app.id, :url=>BASE_URL+"/#{app.id}", :filename=>app.filename, :created_at=>app.created_at},201)
     else
         _error("Problem creating app",400)
