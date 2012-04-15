@@ -1,6 +1,9 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    active_support (3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
     addressable (2.2.7)
     aws-s3 (0.6.2)
       builder
@@ -79,6 +82,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_support
   aws-s3
   data_mapper
   dm-postgres-adapter
