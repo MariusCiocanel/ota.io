@@ -45,7 +45,7 @@ class MixPanel
       end
 
     params = {"event" => event, "properties" => properties}
-    data = ActiveSupport::Base64.encode64s(JSON.generate(params))
+    data = ActiveSupport::Base64.strict_encode64(JSON.generate(params))
     request = "http://api.mixpanel.com/track/?data=#{data}"
 
     `curl -s '#{request}' &`
@@ -101,7 +101,7 @@ end
 
 get '/all' do
     @apps = App.all
-    Mixpanel.track("All Listed",{:token=>"1f737f06eff5580283a9a9e855d98f9d"})
+    MixPanel.track("All Listed",{"token"=>"1f737f06eff5580283a9a9e855d98f9d"})
     
   erb :all
 end
@@ -160,7 +160,7 @@ post '/app' do
     
     if app
         _upload(file_data,key,name)  
-        Mixpanel.track("API Upload",{:token=>"1f737f06eff5580283a9a9e855d98f9d"})
+        MixPanel.track("API Upload",{"token"=>"1f737f06eff5580283a9a9e855d98f9d"})
         _success({:id=>app.id, :url=>BASE_URL+"/#{app.id}", :filename=>app.filename, :created_at=>app.created_at},201)
     else
         _error("Problem creating app",400)
