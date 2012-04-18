@@ -117,7 +117,7 @@ post '/app' do
         name = params['binary'][:filename]
         return _error("Invalid file type. Must be an IPA or APK",400) unless Set[File.extname(name)].proper_subset? Set[".ipa",".apk"]
         
-        android = true if File.extname(name) == "apk"
+        android = true if File.extname(name) == ".apk"
         file_data = params['binary'][:tempfile].read        
     end
     
