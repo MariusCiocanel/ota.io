@@ -45,7 +45,7 @@ class MixPanel
       end
 
     params = {"event" => event, "properties" => properties}
-    data = ActiveSupport::Base64.strict_encode64(JSON.generate(params))
+    data = ActiveSupport::Base64.encode64(JSON.generate(params))
     request = "http://api.mixpanel.com/track/?data=#{data}"
 
     `curl -s '#{request}' &`
@@ -65,7 +65,7 @@ class App
     property :updated_at, DateTime
     
     def install_url
-        self.app_url if self.android
+        return self.app_url if self.android
         "itms-services://?action=download-manifest&url=#{self.manifest_url}"
     end
     
@@ -116,25 +116,11 @@ post '/app' do
     if params['binary']
         name = params['binary'][:filename]
         return _error("Invalid file type. Must be an IPA or APK",400) unless Set[File.extname(name)].proper_subset? Set[".ipa",".apk"]
-        puts name
-        puts File.extname(name)
-        android = true if File.extname(name) == ".apk"
+        android = (File.extname(name) == ".apk")
         file_data = params['binary'][:tempfile].read        
     end
     
     return _error("No binary file provided",400) unless file_data
-
-    
-    
-    # if params['ipa']
-    #     file_data = file[:tempfile].read
-    #     name = params['ipa'][:filename]
-    # elsif params['apk']
-    #     android = true
-    #     
-    #     file_data = params['apk'][:tempfile].read
-    #     name = params['apk'][:filename]
-    # end
     
     id = params['identifier']
     key = _generate_hash_id
