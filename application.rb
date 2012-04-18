@@ -83,7 +83,7 @@ class App
     end
     
     def app_url
-        return ASSET_URL+"/app/#{self.id}/#{self.filename}"
+        return ASSET_URL+"/app/#{self.id}/#{CGI.escape(self.filename)}"
     end
     
     def name
