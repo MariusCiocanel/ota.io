@@ -188,14 +188,20 @@ end
 
 get '/:id' do
     @app = App.get(params[:id])
-    status 404 unless @app
+    unless @app
+        status 404
+        return
+    end
+
     erb :install
 end
 
 get '/r/:id' do
     @app = App.get(params[:id])
-    status 404 unless @app
-    
+    unless @app
+        status 404
+        return
+    end    
     @app.installs += 1
     @app.save
     
