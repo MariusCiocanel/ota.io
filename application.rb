@@ -226,20 +226,22 @@ def _generate_hash_id
     # based on http://erickel.ly/sinatra-url-shortener
     
     # Create an Array of possible characters
-    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    #chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
+    chars = ('a'..'z').to_a + ('a'..'z').to_a + ('a'..'z').to_a
+    len = chars.length
     # Create a random 3 character string from our possible
     # set of choices defined above.
-    tmp = chars[rand(62)]
+    tmp = chars[rand(len)]
     LENGTH_OF_HASH.times do
-        tmp += chars[rand(62)]
+        tmp += chars[rand(len)]
     end
 
     # Until retreiving a Link with this short_url returns
     # false, generate a new short_url and try again.
     until App.get(tmp).nil?
-        tmp = chars[rand(62)]
+        tmp = chars[rand(len)]
         LENGTH_OF_HASH.times do
-            tmp += chars[rand(62)]
+            tmp += chars[rand(len)]
         end
     end
 
