@@ -17,8 +17,4 @@ class HelloWorldTest < Test::Unit::TestCase
     assert_equal 'Hello World', last_response.body
   end
 
-  def test_it_says_hello_to_a_person
-    get '/', :name => 'Simon'
-    assert last_response.body.include?('Simon')
-  end
 end
