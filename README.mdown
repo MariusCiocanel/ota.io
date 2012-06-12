@@ -11,7 +11,7 @@ Amazon S3
 API
 -----
 
-POST: /app
-	- binary - file (IPA or APK)
-	- identifier - string ()
-	- icon - file (PNG)
+  POST: /app
+    - binary - file (IPA or APK)
+    - identifier - string ()
+    - icon - file (PNG)
